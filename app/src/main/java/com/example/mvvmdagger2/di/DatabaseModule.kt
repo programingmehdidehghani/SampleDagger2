@@ -1,5 +1,6 @@
 package com.example.mvvmdagger2.di
 
+import android.content.Context
 import androidx.room.Room
 import com.example.mvvmdagger2.db.FakerDB
 import dagger.Module
@@ -12,7 +13,7 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideFakerDB() : FakerDB{
+    fun provideFakerDB(context : Context) : FakerDB{
         return Room.databaseBuilder(context,FakerDB::class.java,"FakerDB").build()
     }
 }
