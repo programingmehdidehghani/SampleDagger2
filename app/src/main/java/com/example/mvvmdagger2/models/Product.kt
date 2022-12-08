@@ -1,6 +1,6 @@
 package com.example.mvvmdagger2.models
 
-data class Products(
+data class Product(
     val category: String,
     val description: String,
     val id: Int,
