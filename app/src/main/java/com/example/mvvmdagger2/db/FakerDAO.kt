@@ -2,13 +2,14 @@ package com.example.mvvmdagger2.db
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.mvvmdagger2.models.Product
 
 @Dao
 interface FakerDAO {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addProducts(products : List<Product>)
 
     @Query("SELECT * FROM Product")

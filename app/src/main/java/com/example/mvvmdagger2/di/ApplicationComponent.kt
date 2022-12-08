@@ -13,7 +13,7 @@ interface ApplicationComponent {
 
     fun inject(mainActivity: MainActivity)
 
-    fun getMap() : Map<String,ViewModel>
+    fun getMap() : Map<Class<*>,ViewModel>
 
     @Component.Factory
     interface Factory{
