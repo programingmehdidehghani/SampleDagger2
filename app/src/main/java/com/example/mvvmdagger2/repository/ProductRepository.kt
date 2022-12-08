@@ -2,11 +2,12 @@ package com.example.mvvmdagger2.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.mvvmdagger2.db.FakerDB
 import com.example.mvvmdagger2.models.Product
 import com.example.mvvmdagger2.retrofit.FakerApi
 import javax.inject.Inject
 
-class ProductRepository @Inject constructor(private val fakerApi: FakerApi) {
+class ProductRepository @Inject constructor(private val fakerApi: FakerApi,private val fakerDB: FakerDB) {
 
     private val _products = MutableLiveData<List<Product>>()
     val products : LiveData<List<Product>>
@@ -15,6 +16,7 @@ class ProductRepository @Inject constructor(private val fakerApi: FakerApi) {
     suspend fun getProducts(){
         val result = fakerApi.getProducts()
         if (result.isSuccessful && result.body() != null){
+            fakerDB.getFakerDAO().addProducts(result.body()!!)
             _products.postValue(result.body())
         }
     }
